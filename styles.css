@@ -11,7 +11,7 @@
 .block_custom_course_menu #custom_course_menu_interface {
     clear: both;
     float: right;
-    margin: -10px 5px;
+    margin: 0px 0px;
     text-decoration: none;
 }
 .block_custom_course_menu ul.custom_course_menu_category_list {
