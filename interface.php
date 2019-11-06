@@ -78,12 +78,18 @@ foreach ($categories as $category) {
 
     $collapsed = $DB->get_field('block_custom_course_menu', 'collapsed', $params);
     $collapsedcss = 'collapsed';
+    $switch = 'plus';
 
-    if (!$collapsed) {
+    if ($collapsed == 0 && $collapsed <> null) {
         $collapsedcss = 'not_collapsed';
+        $switch = 'minus';
+    } elseif ($category->id > 0 && ($collapsed == null || $collapsed == 1)) {
+        $collapsedcss = 'collapsed';
+    } elseif ($category->id < 0 && $collapsed == null){
+        $collapsedcss = 'not_collapsed';
+        $switch = 'minus';
     }
 
-    $switch = $collapsed ? 'plus' : 'minus';
     $switchicon = ${$switch . 'icon'};
 
     $url = new moodle_url('/blocks/custom_course_menu/ajax/toggle.php', $params);
