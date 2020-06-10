@@ -325,15 +325,10 @@ function get_last_viewed() {
               ORDER BY b.time DESC
               LIMIT $lva";
     } else { // Moodle 2.7+.
-        $sql = "SELECT a.courseid, max(a.timecreated) as date, a.userid
-                  FROM (SELECT *
-                          FROM {logstore_standard_log}
-				         WHERE courseid !=0
-                           AND courseid !=1) AS a
-                 WHERE a.userid = '$USER->id'
-                   AND a.origin != 'cli'
-                GROUP BY a.userid, a.courseid
-                ORDER BY date DESC
+        $sql = "SELECT courseid, timeaccess as date, userid
+                FROM {user_lastaccess}
+                WHERE userid = '$USER->id'
+                ORDER BY timeaccess DESC
                 LIMIT $lva";
     }
 
